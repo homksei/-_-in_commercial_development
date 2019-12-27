@@ -1,5 +1,5 @@
 //
-//  Curves_v2.cpp
+//  Curves.cpp
 //
 //
 //  Copyright © 2019 Alexey Khomenko. All rights reserved.
