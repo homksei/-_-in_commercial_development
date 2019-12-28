@@ -14,10 +14,10 @@
 
 
 class Curve {
-public:
+ public:
     double a;
     double b;
-    
+
     explicit Curve(double _a = 0, double _b = 0):a(_a), b(_b) {
     }
     virtual ~Curve() {
@@ -26,10 +26,10 @@ public:
 };
 
 class Ellipse : public Curve {
-public:
+ public:
     double a;
     double b;
-    
+
     explicit Ellipse(double _a = 0, double _b = 0):Curve(_a, _b) {
         a = _a;
         b = _b;
@@ -41,9 +41,9 @@ public:
 
 
 class Circle: public Curve {
-public:
+ public:
     double r;
-    
+
     explicit Circle(double _r = 0):Curve(_r, _r) {
         r = _r;
     }
@@ -61,30 +61,29 @@ int main(int argc, const char * argv[]) {
         std::cout << "           Curves.cpp 100 " <<  std::endl;
         std::exit(EXIT_FAILURE);
     }
-  
+
     std::vector<Curve *> vec;
     double SummArea = 0.0;
     int CountOfInstance = atoi(argv[1]);
     int MY_MAX = CountOfInstance/2;
-    
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> d(0, MY_MAX);
-    
+
     for (int n = 0; n < CountOfInstance; ++n) {
         if (static_cast<int>(d(gen))%2 == 0) {
             vec.push_back(new Ellipse(d(gen), d(gen)));
-            
+
         } else {
             vec.push_back(new Circle(d(gen)));
-           
         }
     }
 
     std::sort(vec.begin(), vec.end(), [ ](const Curve* lhs, const Curve* rhs) {
         return lhs->Area() < rhs->Area();
     });
-    
+
     std::cout << "Sorted Circles:  " << std::endl;
     for (int i=0; i < CountOfInstance; ++i) {
        if (dynamic_cast<Circle*>(vec[i])) {
@@ -92,13 +91,13 @@ int main(int argc, const char * argv[]) {
             SummArea+=vec[i]->Area();
         }
     }
-   
+
     std::cout << "Total Area of Circles:  " << SummArea << std::endl;
-    
+
     for (auto p : vec) {
         delete p;
     }
     vec.clear();
-    
+
     return 0;
 }
