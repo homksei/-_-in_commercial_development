@@ -48,7 +48,7 @@ class Visitor {
  public:
     virtual void visit(Ellipse *e) = 0;
     virtual void visit(Circle *e) = 0;
-    ~Visitor() {}
+    virtual ~Visitor() {}
 };
 
 void Ellipse::accept(Visitor* v) {
